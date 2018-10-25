@@ -15,8 +15,8 @@ import { IEvent } from './shared';
     </div>
     <div>Price: {{event.price | currency:'USD'}}</div>
     <div [hidden]="!event?.location">
-      <span>Location: {{event.location.address}} </span>
-      <span class="pad-left">{{event.location.city}}, {{event.location.country}}</span>
+      <span>Location: {{event.location?.address}} </span>
+      <span class="pad-left">{{event.location?.city}}, {{event.location?.country}}</span>
     </div>
     <div [hidden]="!event?.onlineUrl">
       OnlineUrl: {{event?.onlineUrl}}

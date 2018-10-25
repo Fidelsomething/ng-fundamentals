@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule} from '@angular/common/http'
 
 import {
   EventsListComponent,
   EventService,
   CreateEventComponent,
-  EventRouteActivator,
   EventListResolver,
   EventThumbnailComponent,
   EventDetailsComponent,
@@ -14,7 +14,8 @@ import {
   DurationPipe,
   UpvoteComponent,
   VoterService,
-  LocationValidator
+  LocationValidator,
+  EventResolver
  } from './events/index'
 
 import { EventsAppComponent } from './events-app.component';
@@ -57,13 +58,14 @@ let jQuery = window['$'];
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers:[
     EventService,
     {provide: TOASTR_TOKEN, useValue:toastr},
     {provide: JQ_TOKEN, useValue:jQuery},
-    EventRouteActivator,
+    EventResolver,
     EventListResolver,
     {
       provide: 'canDeactivateCreateEvent',
