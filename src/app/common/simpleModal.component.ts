@@ -11,7 +11,7 @@ import { JQ_TOKEN } from './jQuery.service'
           <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
           <h4 class="modal-title">{{title}}</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" (click)="closeModal()">
           <ng-content></ng-content>
         </div>
       </div>
@@ -27,6 +27,7 @@ import { JQ_TOKEN } from './jQuery.service'
 export class SimpleModalComponent{
   @Input() title: string;
   @Input() elementId: string;
+  @Input() closeOnBodyClick: string;
   @ViewChild('modalcontainer') containerEl: ElementRef
 
   constructor(@Inject(JQ_TOKEN) private $ : any){
@@ -34,6 +35,8 @@ export class SimpleModalComponent{
   }
 
   closeModal(){
-    this.$(this.containerEl.nativeElement).modal('hide');
+    if(this.closeOnBodyClick === "true"){
+      this.$(this.containerEl.nativeElement).modal('hide');
+    }
   }
 }
