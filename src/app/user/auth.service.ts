@@ -34,12 +34,42 @@ export class AuthService {
       }))
   }
 
+  logout(){
+
+    this.currentUser = undefined;
+    let options = { headers: new HttpHeaders({'Content-Type' : 'application/json'})}
+    return this.http.post('/api/logout', {}, options);
+  }
+
   isAuthenticated(){
     return !! this.currentUser;
+  }
+
+  checkAuthenticationStatus(){
+    this.http.get('/api/currentIdentity')
+      .pipe(tap(data => {
+        if(data instanceof Object){
+          this.currentUser = <IUser>data;
+        }
+      }))
+      .subscribe()
+
+
+      /* Alternate way to check for authenticated user
+
+      .subscribe(data => {
+        if(data instanceof Object){
+          this.currentUser = <IUser>data;
+        }
+      }) */
   }
 
   updateCurrentUser(firstName:string, lastName: string){
     this.currentUser.firstName = firstName
     this.currentUser.lastName = lastName
+
+    let options = { headers: new HttpHeaders({'Content-Type' : 'application/json'})}
+
+    return this.http.put(`/api/users/${this.currentUser.id}`, this.currentUser, options)
   }
 }
