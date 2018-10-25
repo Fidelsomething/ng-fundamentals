@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { EventService } from "../shared/event.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Params } from "@angular/router";
 import { IEvent, ISession } from "../shared";
 
 @Component({
@@ -24,6 +24,12 @@ export class EventDetailsComponent implements OnInit{
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+    this.route.params.forEach((params: Params) => {
+      this.event = this.eventService.getEvent(+params['id'])
+      this.addMode = false;
+    })
+
+
     this.event = this.eventService.getEvent(+this.route.snapshot.params['id'])
   }
 
