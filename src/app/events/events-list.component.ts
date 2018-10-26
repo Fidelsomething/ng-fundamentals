@@ -19,17 +19,17 @@ import { Toastr } from '../common/toastr.service';
 
   `
 })
-export class EventsListComponent implements OnInit{
-  events:IEvent[]
-  constructor(private eventService: EventService, private route:ActivatedRoute){
+export class EventsListComponent implements OnInit {
+  events: IEvent[];
+  constructor(private eventService: EventService, private route: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    //this.eventService.getEvents().subscribe(events => { this.events = events});
-    this.events = this.route.snapshot.data['events']
+    // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    // Add 'implements OnInit' to the class.
+    // this.eventService.getEvents().subscribe(events => { this.events = events});
+    this.events = this.route.snapshot.data['events'];
   }
 
 }

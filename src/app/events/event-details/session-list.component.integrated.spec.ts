@@ -1,4 +1,4 @@
-import {TestBed, async, ComponentFixture } from '@angular/core/testing'
+import {TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { SessionListComponent } from './session-list.component';
 import { DebugElement } from '@angular/core';
 import { AuthService } from 'src/app/user/auth.service';
@@ -9,19 +9,19 @@ import { CollapsibleWellComponent } from 'src/app/common';
 import { By } from '@angular/platform-browser';
 
 describe('SessionListComponent', () => {
-  let fixture : ComponentFixture<SessionListComponent>,
-  component : SessionListComponent,
+  let fixture: ComponentFixture<SessionListComponent>,
+  component: SessionListComponent,
   element: HTMLElement,
-  debugEl: DebugElement
+  debugEl: DebugElement;
 
   beforeEach(async(() => {
-    let mockAuthService =  {
+    const mockAuthService =  {
       isAuthenticated : () => true,
       currentUser: {userName : 'Joe'}
-    }
-    let mockVoterService = {
+    };
+    const mockVoterService = {
       userHasVoted : () => true
-    }
+    };
 
     TestBed.configureTestingModule({
       imports: [],
@@ -36,29 +36,37 @@ describe('SessionListComponent', () => {
         { provide: VoterService, useValue: mockVoterService}
       ],
       schemas: []
-    })
-  }))
+    });
+  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SessionListComponent)
-    component = fixture.componentInstance
-    debugEl = fixture.debugElement
-    element = fixture.nativeElement
-  })
+    fixture = TestBed.createComponent(SessionListComponent);
+    component = fixture.componentInstance;
+    debugEl = fixture.debugElement;
+    element = fixture.nativeElement;
+  });
 
-  describe('initial display', () =>{
+  describe('initial display', () => {
     it('should have the correct session', () => {
-      component.sessions = [{id:3, name: 'Session 1', presenter: 'Joe', duration:1, level: 'beginner', abstract: 'abstract', voters: ['john', 'bob']}]
-      component.filterBy = 'all'
-      component.sortBy = 'name'
-      component.eventId = 4
+      component.sessions = [
+        { id: 3,
+          name: 'Session 1',
+          presenter: 'Joe',
+          duration: 1,
+          level: 'beginner',
+          abstract: 'abstract',
+          voters: ['john', 'bob']
+        }];
+      component.filterBy = 'all';
+      component.sortBy = 'name';
+      component.eventId = 4;
 
-      component.ngOnChanges()
-      fixture.detectChanges()
+      component.ngOnChanges();
+      fixture.detectChanges();
 
-      //expect(element.querySelector('[well-title]').textContent).toContain('Session 1')
-      expect(debugEl.query(By.css('[well-title]')).nativeElement.textContent).toContain('Session 1')
+      // expect(element.querySelector('[well-title]').textContent).toContain('Session 1')
+      expect(debugEl.query(By.css('[well-title]')).nativeElement.textContent).toContain('Session 1');
 
-    })
-  })
-})
+    });
+  });
+});

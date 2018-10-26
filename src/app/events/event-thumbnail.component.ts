@@ -3,7 +3,7 @@ import { IEvent } from './shared';
 
 @Component({
   selector: 'event-thumbnail',
-  template:`
+  template: `
   <div [routerLink]="['/events', event.id]" class="well hoverwell thumbnail">
     <h2>{{event.name | uppercase}}</h2>
     <div>Date: {{event.date | date:'shortDate'}}</div>
@@ -31,6 +31,6 @@ import { IEvent } from './shared';
 
   ]
 })
-export class EventThumbnailComponent{
-  @Input() event:IEvent
+export class EventThumbnailComponent {
+  @Input() event: IEvent;
 }

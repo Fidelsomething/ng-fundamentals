@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { EventService } from "../shared/event.service";
-import { ActivatedRoute, Params } from "@angular/router";
-import { IEvent, ISession } from "../shared";
+import { Component, OnInit } from '@angular/core';
+import { EventService } from '../shared/event.service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { IEvent, ISession } from '../shared';
 
 @Component({
   templateUrl: './event-details.component.html',
@@ -12,37 +12,37 @@ import { IEvent, ISession } from "../shared";
   `]
 })
 
-export class EventDetailsComponent implements OnInit{
-  event:IEvent
-  addMode:boolean
-  filterBy: string = 'all';
-  sortBy: string = 'votes';
+export class EventDetailsComponent implements OnInit {
+  event: IEvent;
+  addMode: boolean;
+  filterBy = 'all';
+  sortBy = 'votes';
 
-  constructor(private eventService: EventService, private route:ActivatedRoute){
+  constructor(private eventService: EventService, private route: ActivatedRoute) {
 
   }
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+    // Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    // Add 'implements OnInit' to the class.
     this.route.data.forEach((data) => {
       this.event = data['event'];
       this.addMode = false;
-    })
+    });
   }
 
-  addSession(){
+  addSession() {
     this.addMode = true;
   }
 
-  saveNewSession(session:ISession){
-    const nextId = Math.max.apply(null, this.event.sessions.map(s => s.id))
+  saveNewSession(session: ISession) {
+    const nextId = Math.max.apply(null, this.event.sessions.map(s => s.id));
     session.id = nextId + 1;
-    this.event.sessions.push(session)
+    this.event.sessions.push(session);
     this.eventService.saveEvent(this.event).subscribe();
-    this.addMode = false
+    this.addMode = false;
   }
 
-  cancelAddSession(){
-    this.addMode = false
+  cancelAddSession() {
+    this.addMode = false;
   }
 }

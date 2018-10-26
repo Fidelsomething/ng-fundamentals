@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'upvote',
@@ -17,14 +17,14 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
   `
 })
 
-export class UpvoteComponent{
+export class UpvoteComponent {
   @Input() count: number;
-  @Input() set voted(val){
-    this.iconColor = val ? 'red' : 'white'
-  } ;
+  @Input() set voted(val) {
+    this.iconColor = val ? 'red' : 'white';
+  }
   @Output() vote = new EventEmitter();
-  iconColor: string
-  onClick(){
-    this.vote.emit({})
+  iconColor: string;
+  onClick() {
+    this.vote.emit({});
   }
 }
